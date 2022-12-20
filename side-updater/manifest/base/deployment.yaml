@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: side-updater
+  name: side-updater
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: side-updater
+  template:
+    metadata:
+      labels:
+        app: side-updater
+    spec:
+      # run nginx with non root user
+      securityContext:
+        runAsUser: 33
+        runAsGroup: 33
+      containers:
+        # serve /usr/share/nginx/html/index.html
+        - name: server
+          image: nginxinc/nginx-unprivileged:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: side-updater-data
+        # update /usr/share/nginx/html/index.html
+        - name: updater
+          image: busybox:latest
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do echo $(date) > /usr/share/nginx/html/index.html; sleep 10; done"]
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: side-updater-data
+      volumes:
+        - name: side-updater-data
+          persistentVolumeClaim:
+            claimName: side-updater-pvc

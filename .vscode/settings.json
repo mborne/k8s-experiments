@@ -1,0 +1,13 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/yamllint.json": "file:///home/mickael/workspace_container/test-multi-container/manifest/deployment.yaml"
+    },
+    "cSpell.words": [
+        "nginx"
+    ],
+    "vs-kubernetes": {
+        "disable-linters": [
+            "resource-limits"
+        ]
+    }
+}

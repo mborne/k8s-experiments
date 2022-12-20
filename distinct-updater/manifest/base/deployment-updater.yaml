@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: updater
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: updater
+  template:
+    metadata:
+      labels:
+        app: updater
+    spec:
+      # run nginx with non root user
+      # securityContext:
+      #   runAsUser: 33
+      #   runAsGroup: 33
+      containers:
+        # update /usr/share/nginx/html/index.html
+        - name: updater
+          image: busybox:latest
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do echo $(date) > /usr/share/nginx/html/index.html; sleep 1; done"]
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: distinct-updater-data
+      volumes:
+        - name: distinct-updater-data
+          persistentVolumeClaim:
+            claimName: distinct-updater-pvc
