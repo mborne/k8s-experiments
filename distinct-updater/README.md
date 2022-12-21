@@ -52,7 +52,7 @@ On note que les Pods se placent bien sur le même Node :
 
 ### Permettre l'exécution sur plusieurs Node avec des volumes ReadWriteMany
 
-En présence d'une classes de stockage supportant ReadWriteMany, ce problème ne se pose plus.
+En présence d'une classe de stockage supportant `ReadWriteMany`, ce problème ne se pose plus.
 
 Voir :
 
