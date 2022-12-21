@@ -4,8 +4,7 @@ kind: Kustomization
 namespace: distinct-updater
 
 resources:
-  - namespace.yaml
   - pvc.yaml
+  - deployment-loop.yaml
   - deployment-server.yaml
-  - deployment-updater.yaml
   - service.yaml

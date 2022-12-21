@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: updater
+  name: distinct-updater-loop
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: updater
+      app: distinct-updater-loop
   template:
     metadata:
       labels:
-        app: updater
+        app: distinct-updater-loop
     spec:
       # run nginx with non root user
       # securityContext:
@@ -18,7 +18,7 @@ spec:
       #   runAsGroup: 33
       containers:
         # update /usr/share/nginx/html/index.html
-        - name: updater
+        - name: loop
           image: busybox:latest
           command: ["/bin/sh"]
           args: ["-c", "while true; do echo $(date) > /usr/share/nginx/html/index.html; sleep 1; done"]

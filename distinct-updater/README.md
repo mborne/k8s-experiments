@@ -3,7 +3,7 @@
 ## Principe
 
 * [manifest/base/deployment-server.yaml](manifest/base/deployment-server.yaml) définit un conteneur servant le dossier `/usr/share/nginx/html` avec `nginx`
-* [manifest/base/deployment-updater.yaml](manifest/base/deployment-updater.yaml) définit un conteneur servant le dossier `/usr/share/nginx/html` avec `nginx`
+* [manifest/base/deployment-loop.yaml](manifest/base/deployment-loop.yaml) définit un conteneur générant régulièrement `/usr/share/nginx/html/index.html` contenant la date courante.
 * [manifest/base/pvc.yaml](manifest/base/pvc.yaml) permet de commander le volume correspondant à `/usr/share/nginx/html`
 * [manifest/base/service.yaml](manifest/base/service.yaml) permet de tester l'application sur http://localhost:8888/ avec :
 
@@ -22,7 +22,8 @@ Il convient de se préparer psychologiquement à un résultat impressionnant :
 Avec la classe "standard" de GKE :
 
 ```bash
-kubectl apply -k distinct-updater/manifest/base/
+kubectl create namespace distinct-updater
+kubectl -n distinct-updater apply -k distinct-updater/manifest/base
 kubectl -n distinct-updater scale deployment/server --replicas=10
 ```
 
@@ -39,7 +40,8 @@ kubectl -n distinct-updater scale deployment/server --replicas=10
 Avec [manifest/affinity/deployment-server.yaml](manifest/affinity/deployment-server.yaml), on ajoute une `podAffinity` pour forcer les Pods "server" à se placer sur le même `Node` que le `Pod` "updater" :
 
 ```bash
-kubectl apply -k distinct-updater/manifest/affinity/
+kubectl create namespace distinct-updater
+kubectl -n distinct-updater apply -k distinct-updater/manifest/affinity
 kubectl -n distinct-updater scale deployment/server --replicas=10
 ```
 

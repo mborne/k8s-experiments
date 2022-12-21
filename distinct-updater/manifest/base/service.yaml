@@ -10,4 +10,4 @@ spec:
     port: 80
     targetPort: 8080
   selector:
-    app: server
+    app: distinct-updater-server

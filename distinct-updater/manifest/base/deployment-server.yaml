@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: server
+  name: distinct-updater-server
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: server
+      app: distinct-updater-server
   template:
     metadata:
       labels:
-        app: server
+        app: distinct-updater-server
     spec:
       # run nginx with non root user
       securityContext:
