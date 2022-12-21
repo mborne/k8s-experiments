@@ -26,7 +26,7 @@ kubectl apply -k distinct-updater/manifest/base/
 kubectl -n distinct-updater scale deployment/server --replicas=10
 ```
 
-...on note que les Pods se place aléatoirement et que le démarrage de certains échouent :
+...on note que les Pods se placent aléatoirement et que le démarrage de certains échoue :
 
 ![docs/distinct-updater-base.png](docs/distinct-updater-base.png)
 
@@ -36,14 +36,14 @@ kubectl -n distinct-updater scale deployment/server --replicas=10
 
 ### Forcer l'exécution des Pod sur le même Node pour pouvoir utiliser ReadWriteOnce
 
-Avec [manifest/affinity/deployment-server.yaml](manifest/affinity/deployment-server.yaml), on force les Pods "server" à se placer sur le même `Node` que le `Pod` "updater" :
+Avec [manifest/affinity/deployment-server.yaml](manifest/affinity/deployment-server.yaml), on ajoute une `podAffinity` pour forcer les Pods "server" à se placer sur le même `Node` que le `Pod` "updater" :
 
 ```bash
 kubectl apply -k distinct-updater/manifest/affinity/
 kubectl -n distinct-updater scale deployment/server --replicas=10
 ```
 
-On note que les Pods se place bien sur le même Node :
+On note que les Pods se placent bien sur le même Node :
 
 ![docs/distinct-updater-affinity.png](docs/distinct-updater-affinity.png)
 
