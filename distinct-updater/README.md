@@ -1,4 +1,4 @@
-# distinct-updater - partage d'un volume par des déploiements distincts
+# side-updater - partage d'un volume par des déploiements distincts (ReadWriteOnce vs ReadWriteMany)
 
 ## Principe
 
