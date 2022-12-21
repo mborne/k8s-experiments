@@ -1,4 +1,4 @@
-# distinct-updater
+# distinct-updater - partage d'un volume par des déploiements distincts
 
 ## Principe
 
@@ -17,7 +17,7 @@ Il convient de se préparer psychologiquement à un résultat impressionnant :
 
 ## Quelques tests...
 
-### Problème avec la base
+### Problème avec la base et l'utilisation de ReadWriteOnce
 
 Avec la classe "standard" de GKE :
 
@@ -34,7 +34,7 @@ kubectl -n distinct-updater scale deployment/server --replicas=10
 > Multi-Attach error for volume "pvc-031456d9-59c2-4997-bbf5-1161fad275ba" Volume is already used by pod(s) server-7c56f84b57-6zq5s, server-7c56f84b57-6kvzc
 
 
-### Forcer l'exécution des Pod sur le même Node
+### Forcer l'exécution des Pod sur le même Node pour pouvoir utiliser ReadWriteOnce
 
 Avec [manifest/affinity/deployment-server.yaml](manifest/affinity/deployment-server.yaml), on force les Pods "server" à se placer sur le même `Node` que le `Pod` "updater" :
 
@@ -50,5 +50,13 @@ On note que les Pods se place bien sur le même Node :
 **Cette approche peut permettre de décomposer une application en plusieurs déploiement même en présence d'un volume ReadWriteOnce partagés**
 
 
+### Permettre l'exécution sur plusieurs Node avec des volumes ReadWriteMany
+
+En présence d'une classes de stockage supportant ReadWriteMany, ce problème ne se pose plus.
+
+Voir :
+
+* [manifest/longhorn/pvc.yaml](manifest/longhorn/pvc.yaml) s'appuyant sur longhorn
+* [manifest/gke-rwx/pvc.yaml](manifest/gke-rwx/pvc.yaml) s'appuyant sur "Cloud Filestore API" et le "Pilote CSI Filestore" de GKE
 
 

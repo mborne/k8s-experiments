@@ -1,6 +1,8 @@
 # k8s-experiments
 
-## side-updater
+Quelques expérimentations avec K8S (en particulier autour des stockages ReadWriteOnce et ReadWriteMany) :
+
+* [side-updater - partage d'un volume ReadWriteOnce par plusieurs conteneurs sur le même Pod](side-updater/README.md)
 
 
 ```bash

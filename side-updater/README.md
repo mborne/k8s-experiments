@@ -1,4 +1,4 @@
-# side-updater
+# side-updater - partage d'un volume ReadWriteOnce par plusieurs conteneurs sur le même Pod
 
 ## Principe
 
