@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apicarto
+  name: apicarto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apicarto
+  template:
+    metadata:
+      labels:
+        app: apicarto
+    spec:
+      containers:
+      - image: ghcr.io/ignf/apicarto:latest
+        name: apicarto
+        ports:
+        - containerPort: 8091
+          name: http
+          protocol: TCP
