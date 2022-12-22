@@ -2,6 +2,12 @@
 
 **ATTENTION : Pour démonstration d'utilisation de K8S, ne pas utiliser**
 
+## Principe
+
+* [manifest/kustomization.yaml](manifest/kustomization.yaml) permet l'assemblage de :
+    * [manifest/deployment.yaml](manifest/deployment.yaml) qui permet de faire tourner les Pods
+    * [manifest/service.yaml](manifest/service.yaml) qui défini un Service devant les Pods
+
 ## Déployer
 
 ```bash
