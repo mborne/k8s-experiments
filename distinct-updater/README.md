@@ -58,8 +58,9 @@ En présence d'une classe de stockage supportant `ReadWriteMany`, ce problème n
 
 Voir :
 
-* [manifest/rwx/pvc.yaml](manifest/rwx/pvc.yaml) si la `storageClass` par défaut supporte `ReadWriteMany`
 * [manifest/longhorn/pvc.yaml](manifest/longhorn/pvc.yaml) s'appuyant sur longhorn
 * [manifest/gke-rwx/pvc.yaml](manifest/gke-rwx/pvc.yaml) s'appuyant sur "Cloud Filestore API" et le "Pilote CSI Filestore" de GKE
+* [manifest/nfs/pvc.yaml](manifest/nfs/pvc.yaml) s'appuyant sur une classe de stockage "nfs" 
+
 
 
