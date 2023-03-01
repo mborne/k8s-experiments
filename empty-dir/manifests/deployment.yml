@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: empty-dir
+  name: empty-dir
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: empty-dir
+  template:
+    metadata:
+      labels:
+        app: empty-dir
+    spec:
+      initContainers:
+      - name: create-index
+        image: busybox:1.28
+        command: ['/bin/sh', '-c', 'cat /etc/hostname > /usr/share/nginx/html/index.html']
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: www-data
+      containers:
+      - image: nginx:latest
+        name: test-container
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: www-data
+        - mountPath: /var/log/nginx
+          name: logs-volume
+      volumes:
+      - name: logs-volume
+        emptyDir:
+          sizeLimit: 500Mi
+      - name: www-data
+        emptyDir: {}
