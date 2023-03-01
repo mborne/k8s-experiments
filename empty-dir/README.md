@@ -16,3 +16,6 @@ bash k8s-test.sh
 # DEVBOX_HOSTNAME=devbox.ign.fr bash k8s-test.sh
 ```
 
+## Ressources
+
+* [bluexp.netapp.com - 5 Types of Kubernetes Volumes](https://bluexp.netapp.com/blog/cvo-blg-5-types-of-kubernetes-volumes-and-how-to-work-with-them)
