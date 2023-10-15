@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-frontend
+spec:
+  policyTypes:
+  - Ingress
+  podSelector:
+    matchLabels:
+      type: frontend
+  ingress:
+  - from:
+      - namespaceSelector: {}
+      - podSelector: {}
+
+
